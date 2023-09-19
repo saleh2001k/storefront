@@ -20,6 +20,28 @@ export function categoryReducer(state = initialState, action) {
         case 'SET-RENDER-PRODUCTS': {
             return { ...state, toRender: action.payload }
         }
+        case 'ADD-TO-CART': {
+            let newArr = state.products.map(element => {
+                if (element.name === action.payload.name) {
+                    let newElement = { ...element, inStock: element.inStock - 1 }
+                    return newElement
+                }
+                return element
+
+            })
+            return { ...state, products: newArr }
+        }
+        case 'REMOVE-FROM-CART': {
+            let newArr = state.products.map(element => {
+                if (element.name === action.payload.name) {
+                    let newElement = { ...element, inStock: element.inStock + 1 }
+                    return newElement
+                }
+                return element
+
+            })
+            return { ...state, products: newArr }
+        }
         default: return state
     }
 }
