@@ -1,4 +1,4 @@
-# StorFront
+# Storefront
 
 ### Deployed link: [here](https://comfy-gumption-982779.netlify.app)
 
