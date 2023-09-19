@@ -14,8 +14,8 @@ function CustomCategories(props) {
     }
 
     return (
-        <Stack direction='row' spacing={2} justifyContent='center' marginY={4}>
-            <ButtonGroup variant='text' color='secondary'>
+        <Stack direction='row' spacing={2} justifyContent='left' paddingX={3} marginY={4}>
+            <ButtonGroup variant='text' color='primary'>
                 {props.productManager.categoryReducer.categories.map(category => (
                     <Button
                         key={category['_id']}

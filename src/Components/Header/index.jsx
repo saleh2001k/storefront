@@ -3,8 +3,10 @@ import { AppBar, IconButton, Stack, Toolbar, Typography } from '@mui/material';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import StorefrontIcon from '@mui/icons-material/Storefront';
 import { Link } from 'react-router-dom';
+import { connect } from 'react-redux';
 
-export default function CustomHeader() {
+
+function Header(props) {
     return (
         <AppBar position='static' color='primary'>
             <Toolbar>
@@ -18,10 +20,15 @@ export default function CustomHeader() {
 
                 <Stack>
                     <IconButton component={Link} to='/cart' color='inherit'>
-                        <ShoppingCartIcon fontSize='medium' />
+                        <ShoppingCartIcon fontSize='medium' />  {props.cart.cart.length} 
                     </IconButton>
                 </Stack>
             </Toolbar>
         </AppBar>
     );
 }
+
+const mapStateToProps = state => ({
+    cart: state.cartReducer
+})
+export default connect(mapStateToProps)(Header)
