@@ -1,5 +1,8 @@
+import axios from "axios"
+
+
 export let initialState = {
-    activeCategory: '',
+    activeCategory: 'electronics',
     categories: [],
     products: [],
     toRender: []
@@ -43,6 +46,18 @@ export function categoryReducer(state = initialState, action) {
             return { ...state, products: newArr }
         }
         default: return state
+    }
+}
+
+export const getProducts = (activeCategory) => async dispatch => {
+
+    try {
+
+        let data = await axios.get(`https://api-js401.herokuapp.com/api/v1/products`)
+        let currentProducts = data.data.results.filter(element => element.category === activeCategory)
+        dispatch(setProducts(currentProducts))
+    } catch (err) {
+        console.log(err)
     }
 }
 
