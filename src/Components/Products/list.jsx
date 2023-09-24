@@ -4,7 +4,7 @@ import Product from './index'
 import { connect } from 'react-redux'
 import { useEffect } from 'react'
 import axios from 'axios'
-import { setActiveCategory, setCategories, setProducts, setRenderList } from "../../store/categories";
+import { setActiveCategory, setCategories, setProducts, setRenderList, getProducts } from "../../store/categories";
 
 
 function ProductList(props) {
@@ -29,11 +29,10 @@ function ProductList(props) {
                 console.log(err)
             }
         }
+        props.getProducts(props.productManager.categoryReducer.activeCategory)
 
         Categories()
-        Products()
-
-    }, [])
+    }, [props.cart.cart, props.productManager.categoryReducer.activeCategory])
     useEffect(() => {
         async function setToRenderProducts() {
             try {
@@ -51,18 +50,20 @@ function ProductList(props) {
         <div style={{ minHeight: '70vh' }}>
 
             <Stack direction={'row'} gap={'15px'} justifyContent='center' flexWrap={'wrap'} width='80%' margin={'auto'} marginY={'50px'} >
-                {props.productManager.categoryReducer.toRender.map(product => <Product key={product['_id']} name={product.name} category={product.category} inStock={product.inStock} price={product.price} product={product} />)}
+            {props.productManager.categoryReducer.products.map(product => <Product key={product['_id']} name={product.name} category={product.category} inStock={product.inStock} price={product.price} product={product} />)}
             </Stack>
         </div>
     )
 }
 const mapStateToProps = state => ({
-    productManager: state
+    productManager: state,
+    cart: state.cartReducer
 })
 const mapDispatchToProps = {
     setActiveCategory,
     setCategories,
     setProducts,
-    setRenderList
+    setRenderList,
+    getProducts
 }
 export default connect(mapStateToProps, mapDispatchToProps)(ProductList)
