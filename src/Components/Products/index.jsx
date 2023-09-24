@@ -3,6 +3,7 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { setActiveCategory, setCategories, setProducts, setRenderList } from '../../store/categories'
 import { addToCart, removeFromCart } from '../../store/cartReducer'
+import { Link } from 'react-router-dom'
 
 
 function Product(props) {
@@ -41,7 +42,7 @@ function Product(props) {
                     }
                 } >
                     <Button onClick={() => handleAddToCart(props.product)} color={'primary'}>Add to Cart</Button>
-                    <Button color={'primary'}>More Details</Button>
+                    <Button color={'primary'} component={Link} to={`/product/${props.product._id}`} >More Details</Button>
                 </CardActions>
             </Card>
         </Box>

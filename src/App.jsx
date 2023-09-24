@@ -8,6 +8,9 @@ import Footer from './Components/Footer/index';
 // import ProductList from './Components/Products';
 // import Categories from './Components/Categories';
 import ProductsPage from './Components/Products/porductsPage';
+import Details from './Components/Products/details';
+import Cart from './Components/Cart/';
+
 
 
 function App() {
@@ -17,6 +20,9 @@ function App() {
         <Header />
         <Routes>
           <Route path='/' element={<ProductsPage />} />
+          <Route path='/cart' element={<Cart />}></Route>
+          <Route path='/product/:id' element={<Details />} />
+
         </Routes>
         <Footer />
       </Router>
